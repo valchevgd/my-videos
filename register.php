@@ -5,6 +5,26 @@
     <link rel="stylesheet" type="text/css" href="assets/style/style.css"/>
 </head>
 <body>
-<h1>Register!!</h1>
+<div class="sign-in-container">
+	<div class="column">
+		<form action="" method="post">
+			<input type="text" name="first_name" placeholder="First Name" required>
+
+			<input type="text" name="last_name" placeholder="Last Name" required>
+
+			<input type="text" name="username" placeholder="Username" required>
+
+			<input type="email" name="email" placeholder="Email" required>
+
+			<input type="email" name="confirm_email" placeholder="Confirm Email" required>
+
+			<input type="password" name="password" placeholder="Password" required>
+
+			<input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+			<input type="submit" name="submit" value="SUBMIT">
+		</form>
+	</div>
+</div>
 </body>
 </html>
