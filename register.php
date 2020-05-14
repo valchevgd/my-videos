@@ -7,6 +7,12 @@
 <body>
 <div class="sign-in-container">
 	<div class="column">
+
+		<div class="header">
+			<h3>Sign Up</h3>
+			<span>to continue to MyFlix</span>
+		</div>
+
 		<form action="" method="post">
 			<input type="text" name="first_name" placeholder="First Name" required>
 
