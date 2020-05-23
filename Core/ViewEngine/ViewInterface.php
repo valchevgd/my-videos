@@ -1,6 +1,6 @@
 <?php
 
-namespace ViewEngine;
+namespace Core\ViewEngine;
 
 
 interface ViewInterface

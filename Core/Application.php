@@ -69,7 +69,7 @@ class Application
 
     public function start()
     {
-        $controllerFullQualifiedName = 'Controllers\\'.ucfirst($this->mvcContext->getControllerName());
+        $controllerFullQualifiedName = 'App\\Controllers\\'.ucfirst($this->mvcContext->getControllerName());
         $controller = $this->resolve($controllerFullQualifiedName);
 
         $refMethod = new \ReflectionMethod($controller, $this->mvcContext->getActionName());
@@ -88,18 +88,19 @@ class Application
 
             $argumentInterface = $argument->getClass();
 
-            $argumentClass = $this->dependencies[$argumentInterface->getName()];
+            $argumentClass = $this->dependencies[$argumentInterface->getName()] ?? $argumentInterface->getName();
             $params[] = $this->resolve($argumentClass);
         }
+        call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
 
-        try {
-            //ToDo better way to handle error
-            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
-        } catch (\Error $e) {
-            $this->mvcContext->setControllerName('Controllers\\Error');
-            $controller = $this->resolve($this->mvcContext->getControllerName());
-            $this->mvcContext->setActionName('index');
-            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
-        }
+//        try {
+//            //ToDo better way to handle error
+//            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+//        } catch (\Error $e) {
+//            $this->mvcContext->setControllerName('App\\Controllers\\Error');
+//            $controller = $this->resolve($this->mvcContext->getControllerName());
+//            $this->mvcContext->setActionName('index');
+//            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+//        }
     }
 }

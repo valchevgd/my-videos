@@ -4,7 +4,7 @@
 namespace Core\Request;
 
 
-abstract class Request
+abstract class Request implements RequestInterface
 {
     protected array $params;
 

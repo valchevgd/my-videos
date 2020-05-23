@@ -1,6 +1,6 @@
 <?php
 
-namespace ViewEngine;
+namespace Core\ViewEngine;
 
 use Core\Mvc\MvcContextInterface;
 
@@ -9,7 +9,7 @@ class View implements ViewInterface
     const TEMPLATES_FOLDER = 'views/';
     const TEMPLATES_EXTENSION = '.php';
 
-    private $mvcContext;
+    private MvcContextInterface $mvcContext;
 
     public function __construct(MvcContextInterface $mvcContext)
     {

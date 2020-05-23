@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Controllers;
+namespace App\Controllers;
 
 
-use Services\HomeServiceInterface;
-use ViewEngine\ViewInterface;
+use App\Services\HomeServiceInterface;
+use Core\ViewEngine\ViewInterface;
 
 class HomeController
 {

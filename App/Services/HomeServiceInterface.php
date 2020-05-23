@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Services;
+namespace App\Services;
 
 
 interface HomeServiceInterface

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Controllers;
+namespace App\Controllers;
 
 
-use ViewEngine\ViewInterface;
+use Core\ViewEngine\ViewInterface;
 
 class RegisterController
 {
