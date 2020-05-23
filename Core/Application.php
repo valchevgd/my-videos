@@ -93,6 +93,7 @@ class Application
         }
 
         try {
+            //ToDo better way to handle error
             call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
         } catch (\Error $e) {
             $this->mvcContext->setControllerName('Controllers\\Error');

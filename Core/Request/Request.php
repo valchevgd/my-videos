@@ -4,7 +4,7 @@
 namespace Services;
 
 
-class RequestService implements RequestServiceInterface
+class Request
 {
 
     private array $params = [];

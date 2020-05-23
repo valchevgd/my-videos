@@ -5,6 +5,8 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Index!</h1>
+<h1>Welcome to</h1>
+<img src="/assets/images/logo.png" alt="logo">
+<p><a href="/register">Sign Up</a></p>
 </body>
 </html>
