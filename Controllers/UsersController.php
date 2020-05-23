@@ -3,13 +3,12 @@
 namespace Controllers;
 
 
-use DTO\UserViewModel;
-use Services\RequestServiceInterface;
-use ViewEngine\ViewInterface;
+use Core\Request\RegisterRequest;
+
 
 class UsersController
 {
-    public function register(RequestServiceInterface $request)
+    public function register(RegisterRequest $request)
     {
         var_dump($request->all()['first_name']);
     }
