@@ -21,8 +21,8 @@ $app = new \Core\Application($mvcContext);
 
 $app->registerDependency(\ViewEngine\ViewInterface::class, \ViewEngine\View::class);
 $app->registerDependency(\Services\HomeServiceInterface::class, \Services\HomeService::class);
-$app->registerDependency(\Services\RequestServiceInterface::class, \Services\RequestService::class);
 try {
+    //ToDo better way to handle error
     $app->start();
 } catch (Exception $e) {
     $mvcContext->setControllerName('error');
