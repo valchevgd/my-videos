@@ -8,6 +8,7 @@
 <div class="sign-in-container">
     <div class="column">
         <div class="header">
+	        <img id="site-logo" src="/assets/images/logo.png" title="myflix" alt="logo">
             <h3>Sign Up</h3>
             <span>to continue to MyFlix</span>
         </div>
