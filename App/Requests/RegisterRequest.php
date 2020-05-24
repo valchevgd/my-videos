@@ -4,7 +4,7 @@
 namespace App\Requests;
 
 
-use Core\Request\Request;
+use Core\Http\Request\Request;
 
 class RegisterRequest extends Request
 {

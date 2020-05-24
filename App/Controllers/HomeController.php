@@ -5,23 +5,15 @@ namespace App\Controllers;
 
 
 use App\Services\HomeServiceInterface;
+use Core\Http\Controller\Controller;
+use Core\Http\Response\ResponseInterface;
 use Core\ViewEngine\ViewInterface;
 
-class HomeController
+class HomeController extends Controller
 {
-    private ViewInterface $view;
-    private HomeServiceInterface $homeService;
-
-    public function __construct(ViewInterface $view, HomeServiceInterface $homeService)
+    public function index(HomeServiceInterface $service)
     {
-        $this->view = $view;
-        $this->homeService = $homeService;
-    }
-
-
-    public function index()
-    {
-        $view_name = $this->homeService->getViewName();
+        $view_name = $service->getViewName();
         $this->view->render($view_name);
     }
 }

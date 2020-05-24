@@ -4,20 +4,10 @@
 namespace App\Controllers;
 
 
-use Core\ViewEngine\ViewInterface;
+use Core\Http\Controller\Controller;
 
-class ErrorController
+class ErrorController extends Controller
 {
-    private ViewInterface $view;
-
-    /**
-     * ErrorController constructor.
-     * @param ViewInterface $view
-     */
-    public function __construct(ViewInterface $view)
-    {
-        $this->view = $view;
-    }
 
     public function index()
     {

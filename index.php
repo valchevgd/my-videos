@@ -21,15 +21,12 @@ $app = new \Core\Application($mvcContext);
 
 $app->registerDependency(\Core\ViewEngine\ViewInterface::class, \Core\ViewEngine\View::class);
 $app->registerDependency(\App\Services\HomeServiceInterface::class, \App\Services\HomeService::class);
-$app->registerDependency(\Core\Request\RequestInterface::class, \Core\Request\Request::class);
-
-
-$app->start();
-//try {
-//    //ToDo better way to handle error
-//    $app->start();
-//} catch (Exception $e) {
-//    $mvcContext->setControllerName('error');
-//    $mvcContext->setActionName('index');
-//    $app->start();
-//}
+$app->registerDependency(\Core\Http\Response\ResponseInterface::class, \Core\Http\Response\Response::class);
+try {
+    //ToDo better way to handle error
+    $app->start();
+} catch (Exception $e) {
+    $mvcContext->setControllerName('error');
+    $mvcContext->setActionName('index');
+    $app->start();
+}

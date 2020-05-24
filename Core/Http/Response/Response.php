@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\Response;
+namespace Core\Http\Response;
 
 
 class Response implements ResponseInterface
