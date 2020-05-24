@@ -13,11 +13,11 @@ $replace = implode('/', $self);
 $params = explode('/', $uri);
 array_shift($params);
 $cont = array_shift($params);
-$controllerName = $cont === '' ? 'home' : $cont;
-$actionName = array_shift($params) ?? 'index';
+$controller_name = $cont === '' ? 'home' : $cont;
+$action_name = array_shift($params) ?? 'index';
 
-$mvcContext = new \Core\Mvc\MvcContext($controllerName, $actionName, $params ?? []);
-$app = new \Core\Application($mvcContext);
+$mvc_context = new \Core\Mvc\MvcContext($controller_name, $action_name, $params ?? []);
+$app = new \Core\Application($mvc_context);
 
 $app->registerDependency(\Core\ViewEngine\ViewInterface::class, \Core\ViewEngine\View::class);
 $app->registerDependency(\App\Services\HomeServiceInterface::class, \App\Services\HomeService::class);
@@ -26,7 +26,7 @@ try {
     //ToDo better way to handle error
     $app->start();
 } catch (Exception $e) {
-    $mvcContext->setControllerName('error');
-    $mvcContext->setActionName('index');
+    $mvc_context->setControllerName('error');
+    $mvc_context->setActionName('index');
     $app->start();
 }

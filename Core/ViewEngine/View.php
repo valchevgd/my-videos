@@ -9,28 +9,28 @@ class View implements ViewInterface
     const TEMPLATES_FOLDER = 'views/';
     const TEMPLATES_EXTENSION = '.php';
 
-    private MvcContextInterface $mvcContext;
+    private MvcContextInterface $mvc_context;
 
-    public function __construct(MvcContextInterface $mvcContext)
+    public function __construct(MvcContextInterface $mvc_context)
     {
-        $this->mvcContext = $mvcContext;
+        $this->mvc_context = $mvc_context;
     }
 
-    public function render($viewName = null, $model = null)
+    public function render($view_name = null, $model = null)
     {
-        if ($viewName != null){
+        if ($view_name != null){
 
-            if (strstr($viewName, '.')){
-                include self::TEMPLATES_FOLDER.$viewName;
+            if (strstr($view_name, '.')){
+                include self::TEMPLATES_FOLDER.$view_name;
             }else{
-                include self::TEMPLATES_FOLDER.$viewName.self::TEMPLATES_EXTENSION;
+                include self::TEMPLATES_FOLDER.$view_name.self::TEMPLATES_EXTENSION;
             }
         }else{
-            $folder = strtolower($this->mvcContext->getControllerName());
-            $name = strtolower($this->mvcContext->getActionName());
-            $viewName = $folder. DIRECTORY_SEPARATOR . $name;
+            $folder = strtolower($this->mvc_context->getControllerName());
+            $name = strtolower($this->mvc_context->getActionName());
+            $view_name = $folder. DIRECTORY_SEPARATOR . $name;
 
-            include self::TEMPLATES_FOLDER.$viewName.self::TEMPLATES_EXTENSION;
+            include self::TEMPLATES_FOLDER.$view_name.self::TEMPLATES_EXTENSION;
         }
     }
 }

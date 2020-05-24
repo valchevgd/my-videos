@@ -5,7 +5,6 @@ namespace App\Controllers;
 
 
 use Core\Http\Controller\Controller;
-use Core\ViewEngine\ViewInterface;
 
 class RegisterController extends Controller
 {

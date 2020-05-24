@@ -5,14 +5,14 @@ namespace Core\Mvc;
 
 class MvcContext implements MvcContextInterface
 {
-    private string $controllerName;
-    private string $actionName;
+    private string $controller_name;
+    private string $action_name;
     private array $params = [];
 
-    public function __construct(string $controllerName, string $actionName, array $params)
+    public function __construct(string $controller_name, string $action_name, array $params)
     {
-        $this->controllerName = $controllerName . 'Controller';
-        $this->actionName = $actionName;
+        $this->controller_name = $controller_name . 'Controller';
+        $this->action_name = $action_name;
         $this->params = $params;
     }
 
@@ -22,15 +22,15 @@ class MvcContext implements MvcContextInterface
      */
     public function getControllerName(): string
     {
-        return $this->controllerName;
+        return $this->controller_name;
     }
 
     /**
-     * @param string $controllerName
+     * @param string $controller_name
      */
-    public function setControllerName(string $controllerName): void
+    public function setControllerName(string $controller_name): void
     {
-        $this->controllerName = $controllerName . 'Controller';
+        $this->controller_name = $controller_name . 'Controller';
     }
 
     /**
@@ -38,15 +38,15 @@ class MvcContext implements MvcContextInterface
      */
     public function getActionName(): string
     {
-        return $this->actionName;
+        return $this->action_name;
     }
 
     /**
-     * @param string $actionName
+     * @param string $action_name
      */
-    public function setActionName(string $actionName): void
+    public function setActionName(string $action_name): void
     {
-        $this->actionName = $actionName;
+        $this->action_name = $action_name;
     }
 
     /**

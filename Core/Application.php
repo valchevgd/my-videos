@@ -12,17 +12,16 @@ class Application
     private array $dependencies = [];
 
     /** @var object[]  */
-    private array $resolvedDependencies = [];
-
+    private array $resolved_dependencies = [];
 
     /** @var MvcContextInterface */
-    private MvcContextInterface $mvcContext;
+    private MvcContextInterface $mvc_context;
 
-    public function __construct(MvcContextInterface $mvcContext)
+    public function __construct(MvcContextInterface $mvc_context)
     {
-        $this->mvcContext = $mvcContext;
-        $this->dependencies[MvcContextInterface::class] = get_class($mvcContext);
-        $this->resolvedDependencies[get_class($mvcContext)] = $mvcContext;
+        $this->mvc_context = $mvc_context;
+        $this->dependencies[MvcContextInterface::class] = get_class($mvc_context);
+        $this->resolved_dependencies[get_class($mvc_context)] = $mvc_context;
     }
 
     public function registerDependency(string $abstraction, string $implementation)
@@ -30,19 +29,19 @@ class Application
         $this->dependencies[$abstraction] = $implementation;
     }
 
-    public function resolve($className)
+    public function resolve($class_name)
     {
-        if (array_key_exists($className, $this->resolvedDependencies)){
-            return $this->resolvedDependencies[$className];
+        if (array_key_exists($class_name, $this->resolved_dependencies)){
+            return $this->resolved_dependencies[$class_name];
         }
 
-        $refClass = new \ReflectionClass($className);
-        $constructor = $refClass->getConstructor();
+        $ref_class = new \ReflectionClass($class_name);
+        $constructor = $ref_class->getConstructor();
 
         if ($constructor === null){
-            $object = new $className;
+            $object = new $class_name;
 
-            $this->resolvedDependencies[$className] = $object;
+            $this->resolved_dependencies[$class_name] = $object;
 
             return $object;
         }
@@ -53,53 +52,53 @@ class Application
 
         foreach ($parameters as $parameter){
 
-            $dependencyInterface = $parameter->getClass();
+            $dependency_interface = $parameter->getClass();
 
-            $dependencyClass = $this->dependencies[$dependencyInterface->getName()];
+            $dependency_class = $this->dependencies[$dependency_interface->getName()];
 
-            $arguments[] = $this->resolve($dependencyClass);
+            $arguments[] = $this->resolve($dependency_class);
         }
 
-        $object = $refClass->newInstanceArgs($arguments);
+        $object = $ref_class->newInstanceArgs($arguments);
 
-        $this->resolvedDependencies[$className] = $object;
+        $this->resolved_dependencies[$class_name] = $object;
 
         return $object;
     }
 
     public function start()
     {
-        $controllerFullQualifiedName = 'App\\Controllers\\'.ucfirst($this->mvcContext->getControllerName());
-        $controller = $this->resolve($controllerFullQualifiedName);
+        $controller_full_qualified_name = 'App\\Controllers\\'.ucfirst($this->mvc_context->getControllerName());
+        $controller = $this->resolve($controller_full_qualified_name);
 
-        $refMethod = new \ReflectionMethod($controller, $this->mvcContext->getActionName());
-        $refParams = $refMethod->getParameters();
-        $count = count($this->mvcContext->getParams());
+        $ref_method = new \ReflectionMethod($controller, $this->mvc_context->getActionName());
+        $ref_params = $ref_method->getParameters();
+        $count = count($this->mvc_context->getParams());
 
         $params = [];
 
-        foreach ($this->mvcContext->getParams() as $param) {
+        foreach ($this->mvc_context->getParams() as $param) {
             $params[] = $param;
         }
 
-        for ($i = $count; $i < count($refParams); $i++){
+        for ($i = $count; $i < count($ref_params); $i++){
 
-            $argument = $refParams[$i];
+            $argument = $ref_params[$i];
 
-            $argumentInterface = $argument->getClass();
+            $argument_interface = $argument->getClass();
 
-            $argumentClass = $this->dependencies[$argumentInterface->getName()] ?? $argumentInterface->getName();
-            $params[] = $this->resolve($argumentClass);
+            $argument_class = $this->dependencies[$argument_interface->getName()] ?? $argument_interface->getName();
+            $params[] = $this->resolve($argument_class);
         }
 
         try {
             //ToDo better way to handle error
-            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+            call_user_func_array([$controller, $this->mvc_context->getActionName()], $params);
         } catch (\Error $e) {
-            $this->mvcContext->setControllerName('App\\Controllers\\Error');
-            $controller = $this->resolve($this->mvcContext->getControllerName());
-            $this->mvcContext->setActionName('index');
-            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+            $this->mvc_context->setControllerName('App\\Controllers\\Error');
+            $controller = $this->resolve($this->mvc_context->getControllerName());
+            $this->mvc_context->setActionName('index');
+            call_user_func_array([$controller, $this->mvc_context->getActionName()], $params);
         }
     }
 }
