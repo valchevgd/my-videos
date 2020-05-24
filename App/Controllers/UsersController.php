@@ -12,7 +12,7 @@ class UsersController extends Controller
     {
         var_dump($request->all()['first_name']);
         var_dump($request->input('email'));
-        $this->response->redirect('/');
+        $this->response->redirect('/login');
     }
 
     public function update(int $id)

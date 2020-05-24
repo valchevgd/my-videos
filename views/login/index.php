@@ -9,21 +9,16 @@
 	<div class="column">
 		<div class="header">
 			<a href="/"><img id="site-logo" src="/assets/images/logo.png" title="myflix" alt="logo"></a>
-			<h3>Sign Up</h3>
+			<h3>Sign In</h3>
 			<span>to continue to MyFlix</span>
 		</div>
 		<form action="/users/register" method="post">
-			<input type="text" name="first_name" placeholder="First Name" required>
-			<input type="text" name="last_name" placeholder="Last Name" required>
 			<input type="text" name="username" placeholder="Username" required>
-			<input type="email" name="email" placeholder="Email" required>
-			<input type="email" name="confirm_email" placeholder="Confirm Email" required>
 			<input type="password" name="password" placeholder="Password" required>
-			<input type="password" name="confirm_password" placeholder="Confirm Password" required>
 			<input type="submit" name="submit" value="SUBMIT">
 		</form>
 
-		<p  class="sign-in-message">Already have an account? <a href="/login">Sign in</a> here!</p>
+		<p  class="sign-in-message">Need an account? <a href="/register">Sign up</a> here!</p>
 	</div>
 </div>
 </body>
