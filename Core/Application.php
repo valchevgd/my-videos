@@ -91,16 +91,15 @@ class Application
             $argumentClass = $this->dependencies[$argumentInterface->getName()] ?? $argumentInterface->getName();
             $params[] = $this->resolve($argumentClass);
         }
-        call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
 
-//        try {
-//            //ToDo better way to handle error
-//            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
-//        } catch (\Error $e) {
-//            $this->mvcContext->setControllerName('App\\Controllers\\Error');
-//            $controller = $this->resolve($this->mvcContext->getControllerName());
-//            $this->mvcContext->setActionName('index');
-//            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
-//        }
+        try {
+            //ToDo better way to handle error
+            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+        } catch (\Error $e) {
+            $this->mvcContext->setControllerName('App\\Controllers\\Error');
+            $controller = $this->resolve($this->mvcContext->getControllerName());
+            $this->mvcContext->setActionName('index');
+            call_user_func_array([$controller, $this->mvcContext->getActionName()], $params);
+        }
     }
 }
