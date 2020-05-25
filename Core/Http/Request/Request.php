@@ -26,7 +26,7 @@ abstract class Request implements RequestInterface
         return $this->params[$name] ?? null;
     }
 
-    protected function returnBackWithErrors(string $view, array $errors) : void
+    protected function returnBackWithErrors(string $view, object $errors) : void
     {
         $this->view->render($view, $errors);
     }
