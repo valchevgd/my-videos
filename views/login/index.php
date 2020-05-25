@@ -13,8 +13,8 @@
 			<span>to continue to MyFlix</span>
 		</div>
 		<form action="/users/register" method="post">
-			<input type="text" name="username" placeholder="Username" required>
-			<input type="password" name="password" placeholder="Password" required>
+			<input type="text" name="username" placeholder="Username" value="<?= $_POST['username'] ?? '' ?>" required>
+			<input type="password" name="password" placeholder="Password" value="<?= $_POST['password'] ?? '' ?>" required>
 			<input type="submit" name="submit" value="SUBMIT">
 		</form>
 
