@@ -72,7 +72,6 @@ class RegisterRequest extends Request
             if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 
                 $is_valid = false;
-                $error_message['email_valid'] = 'Invalid email format';
                 $error_message->setEmailValid('Invalid email format');
             }
 
@@ -119,7 +118,6 @@ class RegisterRequest extends Request
             } else if (strcmp($data['password'], $data['confirm_password']) !== 0) {
 
                 $is_valid = false;
-                $error_message['passwords_miss_match'] = 'Password and confirm password are different';
                 $error_message->setPasswordsMissMatch('Password and confirm password are different');
             }
         }

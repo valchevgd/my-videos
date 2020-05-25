@@ -16,7 +16,7 @@ class View implements ViewInterface
         $this->mvc_context = $mvc_context;
     }
 
-    public function render($view_name = null, $data = null)
+    public function render($view_name = null, $model = null)
     {
         if ($view_name != null){
 
