@@ -20,6 +20,7 @@ class RegisterRequest extends Request
     {
         $is_valid = true;
         $error_message = new RegisterFormErrorsDTO();
+        $valid_data = [];
 
         if (!isset($data['first_name'])) {
 
@@ -32,6 +33,7 @@ class RegisterRequest extends Request
                 $error_message->setFirstNameLength('First name  must be shorter than 30 characters');
             }
         }
+        $valid_data['first_name'] = trim(strip_tags($data['first_name']));
 
         if (!isset($data['last_name'])) {
 
@@ -44,6 +46,7 @@ class RegisterRequest extends Request
                 $error_message->setLastNameLength('Last name  must be shorter than 30 characters');
             }
         }
+        $valid_data['last_name'] = trim(strip_tags($data['last_name']));
 
         if (!isset($data['username'])) {
 
@@ -61,8 +64,8 @@ class RegisterRequest extends Request
             }
 
             //ToDo - add functionality to check for unique username
-
         }
+        $valid_data['username'] = trim(strip_tags($data['username']));
 
         if (!isset($data['email'])) {
 
@@ -93,6 +96,7 @@ class RegisterRequest extends Request
 
             //ToDo - add functionality to check for unique email
         }
+        $valid_data['email'] = trim(strip_tags($data['email']));
 
         if (!isset($data['password'])) {
 
@@ -121,12 +125,13 @@ class RegisterRequest extends Request
                 $error_message->setPasswordsMissMatch('Password and confirm password are different');
             }
         }
+        $valid_data['password'] = trim(strip_tags($data['password']));
 
         if (! $is_valid) {
             $this->returnBackWithErrors('register/index', $error_message);
             exit();
         }
 
-        return $data;
+        return $valid_data;
     }
 }

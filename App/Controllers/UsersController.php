@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-        var_dump($request->all()['first_name']);
+        var_dump($request->all());
         var_dump($request->input('email'));
         $this->response->redirect('/login');
     }
